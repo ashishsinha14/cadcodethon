@@ -1,0 +1,128 @@
+<h2>Risk Profile - Details</h2>
+<div class="row" style="padding-top: 30px;">
+    <div class="col-md-6">
+        <h5>Investment Objective</h5>
+        <div class="row">
+            <div class="col-md-6 gray B center">Most Important</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 gray B center">Very Important</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 gray B center">Somewhat Important</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 gray B center">Least Important</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h5>Investment Need and Risk Tolerance</h5>
+        <div class="row">
+            <div class="col-md-6 gray B center">Risk Tolerance</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 gray B center">Primary Financial Need</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 gray B center">Investment TIme Horizon</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 gray B center">Liquidty Needs</div>
+            <div class="col-md-6">
+                <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select>
+                        <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                            {{obj.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12"> 
+        <h5>Account Risk Profile</h5>
+        <div class="row">
+            <div class="col-md-8 center">
+                <span style="font-size: 30px;">2</span>
+                <span class="gray" style="padding-left: 40px;">(1 most conservative - 5 most aggressive)</span>
+            </div>
+            <div class="col-md-4">
+                <button mat-raised-button color="primary" (click)="save()">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
