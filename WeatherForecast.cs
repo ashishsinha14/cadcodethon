@@ -12,4 +12,9 @@ namespace cad
 
         public string Summary { get; set; }
     }
+
+    public class Database
+    {
+        public string DataBaseName { get; set; }
+    }
 }
