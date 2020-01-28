@@ -1,3 +1,52 @@
-<p>modelcreate works!</p>
-<p>{{message?.text }}</p>
-<p>{{detail?.title}}</p>
+<h4>{{detail?.title}}</h4>
+<div>
+    <div class="col-md12">
+        <!-- <div>
+            <h4>{{detail?.title}}</h4>
+        </div> -->
+        <div class="row">
+            <form class="example-form">
+                <mat-form-field class="typeahead-width">
+                    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto">
+                    <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='getPosts($event)'>
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.ticker">
+                            {{option.name}}
+                        </mat-option>
+                    </mat-autocomplete> -->
+
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)='getPosts($event)'>
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{ option.name }}
+                        </mat-option>
+                      </mat-autocomplete>
+
+                </mat-form-field>
+            </form>
+            <button mat-button color="primary" class="body-md" style="padding-bottom: 25px;" (click)="showRecommendations()">
+                <mat-icon class="mdi mdi-lightbulb icon-display"></mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="table-container mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+        <!-- Item Column -->
+        <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef> Item </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+            <td mat-footer-cell *matFooterCellDef> Total </td>
+        </ng-container>
+
+        <!-- Cost Column -->
+        <ng-container matColumnDef="cost">
+            <th mat-header-cell *matHeaderCellDef> Cost </th>
+            <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+            <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+</div>

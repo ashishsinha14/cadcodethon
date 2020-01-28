@@ -34,7 +34,7 @@ code {
 }
 .wrapper {
   box-sizing: border-box;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto; }
 
 .container-fluid {
@@ -642,3 +642,6 @@ code {
   .last-md {
     order: 1; } }
 
+.icon-display {
+      transform: scale(2);
+}
