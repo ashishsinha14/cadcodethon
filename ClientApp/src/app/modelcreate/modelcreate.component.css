@@ -1,5 +1,6 @@
 .table-container {
     height: 60vh;
+    min-height: 60vh;
     overflow: auto;
   }
   
@@ -18,3 +19,17 @@
   .typeahead-width {
       width:30vw;
   }
+
+  .mat-header-cell, .mat-header-row, .mat-header-cell-def {
+      min-height: 20px;
+      font-weight: bold;
+      color: #1a084c;
+      margin-bottom: 5px;
+  }
+  .mat-row {
+      height: 32px;
+      max-height: 32px;
+  }
+
+
+  .gray { background-color: #f5f5f5 }

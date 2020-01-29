@@ -1,52 +1,105 @@
 <h4>{{detail?.title}}</h4>
-<div>
-    <div class="col-md12">
-        <!-- <div>
+<div class="margin-left:30px;margin-right:30px">
+    
+    <div>
+        <div class="col-md12">
+            <!-- <div>
             <h4>{{detail?.title}}</h4>
         </div> -->
-        <div class="row">
-            <form class="example-form">
-                <mat-form-field class="typeahead-width">
-                    <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto">
-                    <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='getPosts($event)'>
+            <div class="row">
+                <form class="example-form">
+                    <mat-form-field class="typeahead-width">
+                        <input type="text" placeholder="Search" aria-label="Number" matInput [formControl]="searchTerm"
+                            [matAutocomplete]="auto">
+                        <!-- <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='getPosts($event)'>
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option.ticker">
                             {{option.name}}
                         </mat-option>
                     </mat-autocomplete> -->
 
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)='getPosts($event)'>
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{ option.name }}
-                        </mat-option>
-                      </mat-autocomplete>
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn"
+                            (optionSelected)='getPosts($event)'>
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{ option.name }}
+                            </mat-option>
+                        </mat-autocomplete>
 
-                </mat-form-field>
-            </form>
-            <button mat-button color="primary" class="body-md" style="padding-bottom: 25px;" (click)="showRecommendations()">
-                <mat-icon class="mdi mdi-lightbulb icon-display"></mat-icon>
-            </button>
+                    </mat-form-field>
+                </form>
+                <button mat-button color="primary" class="body-md" style="padding-bottom: 25px;"
+                    (click)="showRecommendations()">
+                    <mat-icon class="mdi mdi-lightbulb icon-display"></mat-icon>
+                </button>
+            </div>
         </div>
     </div>
-</div>
-<div class="table-container mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
-        <!-- Item Column -->
-        <ng-container matColumnDef="item">
-            <th mat-header-cell *matHeaderCellDef> Item </th>
-            <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
-            <td mat-footer-cell *matFooterCellDef> Total </td>
-        </ng-container>
+    <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+            <!-- Sector Column -->
+            <ng-container matColumnDef="sector">
+                <th mat-header-cell *matHeaderCellDef> Sector </th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.sector}} </td>
+                <td mat-footer-cell *matFooterCellDef> Total </td>
+            </ng-container>
+            <!-- Sector Column -->
+            <ng-container matColumnDef="industry">
+                <th mat-header-cell *matHeaderCellDef> Industry </th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.industry}} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <!-- Asset Class Column -->
+            <ng-container matColumnDef="asset_class">
+                <th mat-header-cell *matHeaderCellDef> Asset Class </th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.asset_class}} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <!-- Product Name Column -->
+            <ng-container matColumnDef="product_name">
+                <th mat-header-cell *matHeaderCellDef> Product Name </th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.product_name}} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.symbol}} </td>
+                <td mat-footer-cell *matFooterCellDef></td>
+            </ng-container>
+            <!-- Allocation Column -->
+            <ng-container matColumnDef="allocation">
+                <th mat-header-cell *matHeaderCellDef> Allocation </th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.allocation}} </td>
+                <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
+            </ng-container>
+            <!-- MarketCap Column -->
+            <ng-container matColumnDef="marketcap">
+                <th mat-header-cell *matHeaderCellDef> Market Cap </th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.marketcap | currency}} </td>
+                <td mat-footer-cell *matFooterCellDef> </td>
+            </ng-container>
+            <!-- RiskSCore Column -->
+            <ng-container matColumnDef="risk_score">
+                <th mat-header-cell *matHeaderCellDef> Risk Score</th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.risk_score}} </td>
+                <td mat-footer-cell *matFooterCellDef> </td>
+            </ng-container>
+            <!-- Close Price Column -->
+            <ng-container matColumnDef="close_price">
+                <th mat-header-cell *matHeaderCellDef> Close Price</th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.close_price}} </td>
+                <td mat-footer-cell *matFooterCellDef> </td>
+            </ng-container>
+            <!-- Row Num Column -->
+            <ng-container matColumnDef="rownum">
+                <th mat-header-cell *matHeaderCellDef> Row Number</th>
+                <td mat-cell *matCellDef="let transaction"> {{transaction.rownum}} </td>
+                <td mat-footer-cell *matFooterCellDef> </td>
+            </ng-container>
 
-        <!-- Cost Column -->
-        <ng-container matColumnDef="cost">
-            <th mat-header-cell *matHeaderCellDef> Cost </th>
-            <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
-            <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
-    </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;  let even = even;" [ngClass]="{gray: even}">
+            </tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+        </table>
+    </div>
 </div>

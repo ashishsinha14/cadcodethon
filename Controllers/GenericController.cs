@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace cad.Controllers
 {
@@ -27,6 +30,43 @@ namespace cad.Controllers
             {
                 return await client.GetStringAsync(url);
             }
+        }
+
+       
+
+        [HttpPost]
+        public async Task<RiskScore> Post([FromBody] RiskScore request)
+        {
+            RiskScore objRiskSCoreResponse = new RiskScore();
+            var json = JsonConvert.SerializeObject(request);
+            var stringcontent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+            try
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    using (var response = await httpClient.PostAsync("https://ilawebapp.azurewebsites.net/model/riskscore", stringcontent))
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+
+                        objRiskSCoreResponse = JsonConvert.DeserializeObject<Response>(apiResponse).responseObject;
+                    }
+
+                }
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine(ex);
+            }
+            return objRiskSCoreResponse;
+            //var client = new HttpClient();
+            //client.BaseAddress = new Uri("http://ilawebapp.azurewebsites.net/model/riskscore");
+            //var response = await client.PostAsJsonAsync("http://ilawebapp.azurewebsites.net/model/riskscore", request);
+            //var responseObject = await response.Content.ReadAsAsync<RiskScore>();
+            //return responseObject;
+
+            //var response = new HttpClient().PostAsJsonAsync<RiskScore>("http://ilawebapp.azurewebsites.net/model/riskscore", request).Result;
+            //var responseObject = await response.Content.ReadAsAsync<RiskScore>();
+            //return responseObject;
         }
 
         //[HttpPost]
@@ -59,5 +99,5 @@ namespace cad.Controllers
         //}
 
     }
-    
+
 }
