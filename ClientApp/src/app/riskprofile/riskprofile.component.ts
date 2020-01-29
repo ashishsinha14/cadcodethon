@@ -11,6 +11,24 @@ export interface Objective {
   viewValue: string;
 }
 
+export interface RiskData {
+  rownum: number;
+  account_name: string;
+  inv_horizon: string;
+  inv_obj_least: number;
+  inv_obj_most: number;
+  inv_obj_imp: number;
+  inv_obj_some_imp: number;
+  inv_amount: number;
+  liquidy_need: string;
+  model_id: number;
+  model_name: string;
+  primary_fin_need: string;
+  risk_profile: number;
+  risk_tolerance: number;
+  volatility: number;
+}
+
 @Component({
   selector: 'app-riskprofile',
   templateUrl: './riskprofile.component.html',
@@ -53,6 +71,8 @@ export class RiskprofileComponent implements OnInit {
   Http: HttpClient;
   BaseURL: string;
   Headers: any;
+  rskProfile:any;
+  request: any;
 
   constructor(private router: Router, private eventBusService: EventBusService,
     private observableService: ObservableService, http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
@@ -77,16 +97,20 @@ export class RiskprofileComponent implements OnInit {
     // setTimeout(() => {
     //   this.eventBusService.emit(new EventData('SelectArticleDetail', article));
     // },1000)
-    // setTimeout(() => {
-    //   this.sendMessage();
-    // },1010)
+
     //   //console.log("LogOn.OnClick * pControl=" + pControl);
-    this.Http.post(this.BaseURL + 'generic', this.createRequest(), { headers: this.Headers })
-    .subscribe(result => { alert("Posted" + JSON.stringify(result)); }, error => console.error(error));
+    this.Http.post(this.BaseURL + 'generic', this.request, { headers: this.Headers })
+      .subscribe(result => {
+        // alert("Posted" + JSON.stringify(result));
+        this.rskProfile = (result as RiskData).risk_profile;
+        this.eventBusService.saveData(result);
+      }, error => console.error(error));
+
+
   }
-  sendMessage(): void {
+  sendMessage(data): void {
     // send message to subscribers via observable subject
-    this.eventBusService.sendMessage('Message from Home to Create!');
+    this.eventBusService.sendMessage(data);
   }
 
   clearMessage(): void {
@@ -112,6 +136,32 @@ export class RiskprofileComponent implements OnInit {
       "volatility": 8.04
     }
     return request;
+  }
+
+  selChange(event, id) {
+    this.request = this.createRequest();
+    if(event.id === 'MI') {
+      this.request.inv_obj_most = event.value;
+    } else if(event.id === 'VI') {
+      this.request.inv_obj_imp = event.value;
+    } else if(event.id === 'SI') {
+      this.request.inv_obj_some_imp = event.value;
+    } else if(event.id === 'LI') {
+      this.request.inv_obj_least = event.value;
+    } else if(event.id === 'Risk Tolerance') {
+      this.request.risk_tolerance = event.value;
+    } else if(event.id === 'Liquidty Need') {
+      this.request.liquidy_need = event.value;
+    } else if(event.id === 'Time Horizon') {
+      this.request.inv_horizon = event.value;
+    }
+    this.request.rownum = 0;
+    this.request.account_name = '';
+    this.request.volatility = 8.04;
+    this.request.primary_fin_need = '';
+    this.request.inv_amount = 100;
+    this.request.model_id = null;
+    this.request.model_name = '';
   }
 
 }

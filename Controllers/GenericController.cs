@@ -25,7 +25,7 @@ namespace cad.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> Get()
         {
-            string url = "http://ilawebapp.azurewebsites.net/get-db-objects"; 
+            string url = "https://svcsexplorers.azurewebsites.net/get-db-objects"; 
             using (HttpClient client = new HttpClient())
             {
                 return await client.GetStringAsync(url);
@@ -44,7 +44,7 @@ namespace cad.Controllers
             {
                 using (var httpClient = new HttpClient())
                 {
-                    using (var response = await httpClient.PostAsync("https://ilawebapp.azurewebsites.net/model/riskscore", stringcontent))
+                    using (var response = await httpClient.PostAsync("https://svcsexplorers.azurewebsites.net/model/riskscore", stringcontent))
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
 

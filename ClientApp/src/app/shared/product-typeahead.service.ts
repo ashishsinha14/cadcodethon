@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 
@@ -19,13 +19,14 @@ export class TypeAheadService {
     }
 
     search(query) {
-        var listOfProducts = this.Http.get(this.BaseURL + 'product/getProduct?' + query)
+        const params = new HttpParams().set('query', query);
+        var listOfProducts = this.Http.get(this.BaseURL + 'product', {params})
             .pipe(
                 debounceTime(500),  // WAIT FOR 500 MILISECONDS ATER EACH KEY STROKE.
                 map(
                     (data: any) => {
                         return (
-                            data.length != 0 ? data as any[] : [{ "Product": "No Record Found" } as any]
+                            data.length != 0 ? data as any : [{ "Product": "No Record Found" } as any]
                         );
                     }
                 ));

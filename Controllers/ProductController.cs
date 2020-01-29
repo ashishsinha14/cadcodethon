@@ -22,32 +22,30 @@ namespace cad.Controllers
         }
 
         [HttpGet]
-        [Route("getProduct")]
-        public async Task<ActionResult<string>> Get()
+        public async Task<ActionResult<string>> Get([FromQuery] string query)
         {
-            string url = "http://ilawebapp.azurewebsites.net/products";
-            string queryString = Request.QueryString.ToString().ToLower();
-            if (!string.IsNullOrEmpty(queryString))
-            {
-                url = url + "?query" + queryString;
-            }
+            string url = "https://svcsexplorers.azurewebsites.net/products";
+            // string queryString = Request.QueryString.ToString().ToLower();
+            url = url + "?query=" + query;
 
             using (HttpClient client = new HttpClient())
             {
                 return await client.GetStringAsync(url);
             }
+
+
         }
 
-        [HttpGet]
-        [Route("getProduct/{productId}")]
-        public async Task<ActionResult<string>> Get(string productId)
-        {
-            string url = "http://ilawebapp.azurewebsites.net/products";
-            using (HttpClient client = new HttpClient())
-            {
-                return await client.GetStringAsync(url);
-            }
-        }
+        //[HttpGet]
+        //[Route("getProduct/{productId}")]
+        //public async Task<ActionResult<string>> Get(string productId)
+        //{
+        //    string url = "http://ilawebapp.azurewebsites.net/products";
+        //    using (HttpClient client = new HttpClient())
+        //    {
+        //        return await client.GetStringAsync(url);
+        //    }
+        //}
 
     }
 }

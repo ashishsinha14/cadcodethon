@@ -8,7 +8,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'MI')" id="MI">
                             <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -21,7 +21,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'VI')" id="VI">
                             <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -34,7 +34,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'SI')" id="SI">
                             <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -47,7 +47,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'LI')" id="LI">
                             <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -63,7 +63,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'Risk Tolerance')">
                             <mat-option *ngFor="let obj of riskTolerance" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -76,7 +76,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'Fin Need')">
                             <mat-option *ngFor="let obj of primFinNeed" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -89,7 +89,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'Time Horizon')">
                             <mat-option *ngFor="let obj of invHorizon" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -102,7 +102,7 @@
                 <div class="col-md-6">
                     <mat-form-field>
                         <!-- <mat-label>Select</mat-label> -->
-                        <mat-select>
+                        <mat-select (selectionChange)="selChange($event,'Liquidty Need')">
                             <mat-option *ngFor="let obj of liqNeed" [value]="obj.value">
                                 {{obj.viewValue}}
                             </mat-option>
@@ -120,7 +120,7 @@
     <div class="row" style="display: block; text-align: center;padding-top: 40px;">
         <div>
             <span class="B">Account Risk Profile</span>
-            <span class="B" style="padding-left: 30px;">2</span>
+            <span class="B" style="padding-left: 30px;">{{rskProfile}}</span>
             <span class="gray" style="padding-left: 40px;">(1 most conservative - 5 most aggressive)</span>
         </div>
     </div>

@@ -8,6 +8,7 @@ import { EventData } from 'src/app/shared/event.class';
 })
 export class EventBusService {
   private subject$ = new Subject();
+  riskData;
 
   constructor() { }
 
@@ -32,4 +33,14 @@ export class EventBusService {
   getMessage(): Observable<any> {
     return this.subject$.asObservable();
   }
+
+  saveData(data) {
+    this.riskData = data;
+  }
+
+  getData() {
+    return this.riskData;
+  }
+
+  
 }
