@@ -13,6 +13,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { RiskprofileComponent } from './riskprofile/riskprofile.component';
 import { ModelcreateComponent } from './modelcreate/modelcreate.component';
+import { RecommendationComponent } from './recommendation/recommendation.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModelcreateComponent } from './modelcreate/modelcreate.component';
     CounterComponent,
     FetchDataComponent,
     RiskprofileComponent,
-    ModelcreateComponent
+    ModelcreateComponent,
+    RecommendationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,6 +42,7 @@ import { ModelcreateComponent } from './modelcreate/modelcreate.component';
     ])
   ],
   providers: [],
+  entryComponents: [RecommendationComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

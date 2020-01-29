@@ -51,21 +51,34 @@ export class RiskprofileComponent implements OnInit {
   ];
 
   primFinNeed: Objective[] = [
-    { value: 0, viewValue: 'Conservative' },
-    { value: 1, viewValue: 'Moderate' },
-    { value: 2, viewValue: 'Aggressive' }
+    { value: 0, viewValue: 'Wealth Accumulation/Investment' },
+    { value: 1, viewValue: 'Retirement' },
+    { value: 2, viewValue: 'Education Planning' },
+    { value: 3, viewValue: 'Current Income' },
+    { value: 4, viewValue: 'Estate/Legacy Planning' },
+    { value: 5, viewValue: 'Major Purchase/Expense' },
+    { value: 6, viewValue: 'Wealth Accumulation/Investment' },
+    { value: 7, viewValue: 'Major Purchase Income' },
   ];
 
   invHorizon: Objective[] = [
-    { value: 0, viewValue: 'Conservative' },
-    { value: 1, viewValue: 'Moderate' },
-    { value: 2, viewValue: 'Aggressive' }
+    { value: 0, viewValue: '11 to 20 Years' },
+    { value: 1, viewValue: 'Over 20 Years' },
+    { value: 3, viewValue: '6 to 10 Years' },
+    { value: 4, viewValue: 'Immediate' },
+    { value: 5, viewValue: '2 to 5 Years' },
+    { value: 6, viewValue: 'Less than 2 Years' },
+    { value: 7, viewValue: '11 to 20 Years' }
   ];
 
   liqNeed: Objective[] = [
-    { value: 0, viewValue: 'Conservative' },
-    { value: 1, viewValue: 'Moderate' },
-    { value: 2, viewValue: 'Aggressive' }
+    { value: 0, viewValue: '11 to 20 Years' },
+    { value: 1, viewValue: 'Over 20 Years' },
+    { value: 3, viewValue: '6 to 10 Years' },
+    { value: 4, viewValue: 'Immediate' },
+    { value: 5, viewValue: '2 to 5 Years' },
+    { value: 6, viewValue: 'Less than 2 Years' },
+    { value: 7, viewValue: '11 to 20 Years' }
   ];
 
   Http: HttpClient;

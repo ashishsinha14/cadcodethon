@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { EventBusService } from 'src/app/shared/event-bus.service';
 import { Article } from 'src/app/shared/article.interface';
 import { ObservableService } from 'src/app/shared/observable.service';
@@ -9,6 +9,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
+import { RecommendationComponent } from '../recommendation/recommendation.component';
+import { MatDialog } from '@angular/material';
 
 export interface Transaction {
   sector: string;
@@ -76,15 +79,16 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
 
   dataSource = new MatTableDataSource<Transaction>(this.transactions);
   searchTerm: FormControl = new FormControl();
-  constructor(private eventBusService: EventBusService, private observableService: ObservableService, private service: TypeAheadService) {
+  constructor(private eventBusService: EventBusService, private observableService: ObservableService, private service: TypeAheadService,
+    private dialog: MatDialog) {
     // this.eventBusService.on('SelectArticleDetail', (data: Article) => {
     //   this.riskData = data;
     //   this.riskData.title = 'Mr';
     // });
     // this.subscription = this.eventBusService.getMessage().subscribe(message => { this.message = message; });
-    
-    
-   
+
+
+
 
     // this.eventBusService.on('SelectArticleDetail', (data: Article) => {
     //   this.detail = data;
@@ -107,7 +111,7 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   
+
     this.message = this.eventBusService.getData();
     console.log(this.message);
     // alert(this.message);
@@ -170,7 +174,28 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
   }
 
   showRecommendations() {
+    this.openDialog();
+  }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(RecommendationComponent, {
+      width:'50vw',
+      height: '50vh',
+      data: {
+        message: this.message.risk_profile,
+        buttonText: {
+          ok: 'Save',
+          cancel: 'No'
+        }
+      }
+    });
+    
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        alert('Confimr');
+      }
+    });
   }
 
 }
