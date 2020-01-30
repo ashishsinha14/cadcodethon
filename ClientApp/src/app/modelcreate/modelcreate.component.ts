@@ -42,7 +42,7 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
   // {ticker: 'FB', name: 'Facebook'}];
 
   options: any[];
-
+  showSpinner = false;
 
   product;
 
@@ -202,7 +202,7 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
     console.log(event);
     console.log(elements);
     // this.getTotalCost();
-    alert('1');
+    // alert('1');
     this.dataSource._updateChangeSubscription();
   }
 
@@ -253,10 +253,10 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
 // position: 1
         result.data.forEach(itm => {
           const newItem: Transaction = {
-            sector: itm.Sector,
-            industry: itm.Industry,
-            asset_class: itm.L2,
-            product_name: itm.Name,
+            sector: itm.sector,
+            industry: itm.industry,
+            asset_class: itm.asset_class,
+            product_name: itm.product_name,
             symbol: '',
             allocation: 0,
             marketcap: itm.MarketCap,
@@ -274,4 +274,10 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
     });
   }
 
+  submit() {
+    this.showSpinner = true;
+    setTimeout(() => {
+      this.showSpinner = false;
+    }, 3000);
+  }
 }

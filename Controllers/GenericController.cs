@@ -60,4 +60,28 @@ namespace cad.Controllers
         }
 
     }
+
+
+    [ApiController]
+    [Route("[controller]")]
+    public class Recommendation1Controller : ControllerBase
+    {
+        private readonly ILogger<Recommendation1Controller> _logger;
+
+        public Recommendation1Controller(ILogger<Recommendation1Controller> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet("{model}")]
+        public async Task<ActionResult<string>> Get(string model)
+        {
+            string url = "https://recomapi.azurewebsites.net/api/products";
+            url = url + "?model=" + model;
+            using (HttpClient client = new HttpClient())
+            {
+                return await client.GetStringAsync(url);
+            }
+        }
+    }
 }

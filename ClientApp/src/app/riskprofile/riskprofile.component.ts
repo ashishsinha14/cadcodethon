@@ -87,6 +87,8 @@ export class RiskprofileComponent implements OnInit {
   rskProfile:any;
   request: any = {};
 
+  showSpinner = false;
+
   constructor(private router: Router, private eventBusService: EventBusService,
     private observableService: ObservableService, http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.Http = http;
@@ -112,12 +114,15 @@ export class RiskprofileComponent implements OnInit {
     // },1000)
 
     //   //console.log("LogOn.OnClick * pControl=" + pControl);
+    this.showSpinner = true;
     this.Http.post(this.BaseURL + 'generic', this.request, { headers: this.Headers })
       .subscribe(result => {
         // alert("Posted" + JSON.stringify(result));
+        this.showSpinner = false;
         this.rskProfile = (result as RiskData).risk_profile;
         this.eventBusService.saveData(result);
-      }, error => console.error(error));
+      }, error =>  {console.error(error);
+        this.showSpinner = false; });
 
 
   }

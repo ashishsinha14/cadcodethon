@@ -6,11 +6,11 @@ import { HttpClient } from '@angular/common/http';
 import { EventBusService } from 'src/app/shared/event-bus.service';
 
 export interface Recommendation {
-  Name: string,
+  product_name: string,
   MarketCap: number,
-  Sector: string,
-  Industry: string,
-  L2: string,
+  sector: string,
+  industry: string,
+  asset_class: string,
   close_price: number,
   risk_score: number,
   return_2019: number,
@@ -46,8 +46,8 @@ const ELEMENT_DATA: Recommendation[] = [
   styleUrls: ['./recommendation.component.css']
 })
 export class RecommendationComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'position', 'Name',
-    'L2', 'risk_score', 'return_2019', 'return_2018', 'return_2017',
+  displayedColumns: string[] = ['select', 'position', 'product_name',
+    'asset_class', 'return_2019', 'return_2018', 'return_2017',
     'return_2016', 'return_2015'];
 
 
@@ -60,7 +60,7 @@ export class RecommendationComponent implements OnInit {
   Http: HttpClient;
   BaseURL: string;
   Headers: any;
-
+  showSpinner = false;
   recommendations: Recommendation[] = [];
   dataSource = new MatTableDataSource<Recommendation>(this.recommendations);
   selection = new SelectionModel<Recommendation>(true, []);
@@ -134,7 +134,9 @@ export class RecommendationComponent implements OnInit {
     //     "modelHoldings": null
     const data = encodeURIComponent(JSON.stringify(translatedrskData));
     console.log(data);
-    this.Http.get<any>(this.BaseURL + 'recommendation/' + data).subscribe(result => {
+    this.showSpinner = true;
+    this.Http.get<any>(this.BaseURL + 'recommendation1/' + data).subscribe(result => {
+      this.showSpinner = false;
       if (result && result.length > 0) {
         for (let index = 0; index < result.length; index++) {
           const element = result[index];
@@ -146,7 +148,10 @@ export class RecommendationComponent implements OnInit {
       console.log(this.recommendations);
       this.dataSource._updateChangeSubscription();
       // alert("Posted" + JSON.stringify(result));
-    }, error => console.error(error));
+    }, error => {
+      console.error(error)
+      this.showSpinner = false;
+    });
   }
 
 
@@ -155,12 +160,16 @@ export class RecommendationComponent implements OnInit {
     this.dialogRef.close({ data: this.selectedRows });
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
 
-    if(numSelected === numRows && numRows !== 0) {
+    if (numSelected === numRows && numRows !== 0) {
       this.selectedRows = this.dataSource.data;
     }
     return numSelected === numRows;
@@ -176,13 +185,13 @@ export class RecommendationComponent implements OnInit {
         const idx = this.selectedRows.findIndex(itm => itm.position === row.position);
         if (idx === -1) {
           this.selectedRows.push(row);
-        } 
+        }
       }
     } else {
       const idx = this.selectedRows.findIndex(itm => itm.position === row.position);
-        if (idx !== -1) {
-          this.selectedRows = this.selectedRows.filter(itm => itm.position === row.position);
-        } 
+      if (idx !== -1) {
+        this.selectedRows = this.selectedRows.filter(itm => itm.position === row.position);
+      }
     }
   }
 

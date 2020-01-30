@@ -1,118 +1,127 @@
 <div style="margin-left:70px; margin-right:70px">
-    <h2>Risk Profile - Details</h2>
+    <mat-spinner [diameter]="30" *ngIf="showSpinner"></mat-spinner>
+    <h2>Client Profile - Details</h2>
     <div class="row" style="padding-top: 30px;">
+
+
         <div class="col-md-6">
-            <h5>Investment Objective</h5>
-            <div class="row">
-                <div class="col-md-6 gray B center">Most Important</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'MI')" id="MI">
-                            <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+            <mat-card style="background-color: #edf6fc;">
+                <h5>Investment Objective</h5>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Most Important</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'MI')" id="MI">
+                                <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 gray B center">Very Important</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'VI')" id="VI">
-                            <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Very Important</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'VI')" id="VI">
+                                <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 gray B center">Somewhat Important</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'SI')" id="SI">
-                            <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Somewhat Important</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'SI')" id="SI">
+                                <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 gray B center">Least Important</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'LI')" id="LI">
-                            <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Least Important</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'LI')" id="LI">
+                                <mat-option *ngFor="let obj of incomeobjtives" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
+            </mat-card>
         </div>
+
+
         <div class="col-md-6">
-            <h5>Investment Need and Risk Tolerance</h5>
-            <div class="row">
-                <div class="col-md-6 gray B center">Risk Tolerance</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'Risk Tolerance')">
-                            <mat-option *ngFor="let obj of riskTolerance" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+            <mat-card style="background-color: #edf6fc;">
+                <h5>Investment Need and Risk Tolerance</h5>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Risk Tolerance</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'Risk Tolerance')">
+                                <mat-option *ngFor="let obj of riskTolerance" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 gray B center">Primary Financial Need</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'Fin Need')">
-                            <mat-option *ngFor="let obj of primFinNeed" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Primary Financial Need</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'Fin Need')">
+                                <mat-option *ngFor="let obj of primFinNeed" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 gray B center">Investment Time Horizon</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'Time Horizon')">
-                            <mat-option *ngFor="let obj of invHorizon" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Investment Time Horizon</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'Time Horizon')">
+                                <mat-option *ngFor="let obj of invHorizon" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 gray B center">Liquidty Needs</div>
-                <div class="col-md-6">
-                    <mat-form-field>
-                        <!-- <mat-label>Select</mat-label> -->
-                        <mat-select (selectionChange)="selChange($event,'Liquidty Need')">
-                            <mat-option *ngFor="let obj of liqNeed" [value]="obj.value">
-                                {{obj.viewValue}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-md-6 gray B center">Liquidty Needs</div>
+                    <div class="col-md-6">
+                        <mat-form-field>
+                            <!-- <mat-label>Select</mat-label> -->
+                            <mat-select (selectionChange)="selChange($event,'Liquidty Need')">
+                                <mat-option *ngFor="let obj of liqNeed" [value]="obj.value">
+                                    {{obj.viewValue}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
+            </mat-card>
         </div>
     </div>
-    <div class="row center">
+    <div class="row center" style="padding-top: 40px;">
         <div class="col-md-12" style="text-align: center;">
             <button mat-raised-button color="primary" (click)="save()">Calculate</button>
         </div>

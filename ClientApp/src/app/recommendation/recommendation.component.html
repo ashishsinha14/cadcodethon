@@ -1,7 +1,7 @@
-
+<mat-spinner [diameter]="30" *ngIf="showSpinner"></mat-spinner>
 <div>
   <mat-dialog-content>
-    <span class="B">Recommeded Products</span>
+    <span class="B">Recommended Products</span>
     <div class="table-container mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <!-- Checkbox Column -->
@@ -25,22 +25,22 @@
         </ng-container>
 
         <!-- Name Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="product_name">
           <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>
         </ng-container>
 
         <!-- Asset Class Column -->
-        <ng-container matColumnDef="L2">
+        <ng-container matColumnDef="asset_class">
           <th mat-header-cell *matHeaderCellDef> Asset Class </th>
-          <td mat-cell *matCellDef="let element"> {{element.L2}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.asset_class}} </td>
         </ng-container>
 
         <!-- Risk Score Column -->
-        <ng-container matColumnDef="risk_score">
+        <!-- <ng-container matColumnDef="risk_score">
           <th mat-header-cell *matHeaderCellDef> Risk Score</th>
           <td mat-cell *matCellDef="let element"> {{element.risk_score}} </td>
-        </ng-container>
+        </ng-container> -->
 
         <!-- Risk Score Column -->
         <ng-container matColumnDef="return_2019">
@@ -82,6 +82,6 @@
   </mat-dialog-content>
   <mat-dialog-actions align="center">
     <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">Select</button>
-         <!--<button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button> -->
+    <button mat-raised-button mat-dialog-close tabindex="-1" (click)="close()">Cancel</button>
   </mat-dialog-actions>
 </div>
