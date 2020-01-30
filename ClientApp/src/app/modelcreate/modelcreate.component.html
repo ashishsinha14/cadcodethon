@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-6" style="padding-left: 100px;">
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Name Your Model" value="">
+                <input matInput placeholder="Enter Model Name" value="">
               </mat-form-field>
         </div>
     </div>
@@ -30,7 +30,7 @@
                     </mat-autocomplete> -->
 
                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn"
-                            (optionSelected)='getPosts($event)'>
+                            (optionSelected)='getPosts($event, trigger, auto)'>
                             <mat-option *ngFor="let option of options?.responseObject" [value]="option">
                                 {{ option.product_name }}
                             </mat-option>
@@ -80,7 +80,11 @@
             <!-- Allocation Column -->
             <ng-container matColumnDef="allocation">
                 <th mat-header-cell *matHeaderCellDef> Allocation </th>
-                <td mat-cell *matCellDef="let transaction"> {{transaction.allocation}} </td>
+                <td mat-cell *matCellDef="let transaction"> 
+                    <mat-form-field floatLabel="never">
+                        <input matInput  [value]="transaction.allocation" [(ngModel)]="transaction.allocation">
+                    </mat-form-field>
+                </td>
                 <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
             </ng-container>
             <!-- MarketCap Column -->
@@ -99,12 +103,6 @@
             <ng-container matColumnDef="close_price">
                 <th mat-header-cell *matHeaderCellDef> Close Price</th>
                 <td mat-cell *matCellDef="let transaction"> {{transaction.close_price}} </td>
-                <td mat-footer-cell *matFooterCellDef> </td>
-            </ng-container>
-            <!-- Row Num Column -->
-            <ng-container matColumnDef="rownum">
-                <th mat-header-cell *matHeaderCellDef> Row Number</th>
-                <td mat-cell *matCellDef="let transaction"> {{transaction.rownum}} </td>
                 <td mat-footer-cell *matFooterCellDef> </td>
             </ng-container>
 

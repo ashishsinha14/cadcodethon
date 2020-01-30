@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import { RecommendationComponent } from '../recommendation/recommendation.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatAutocompleteTrigger, MatAutocomplete } from '@angular/material';
 
 export interface Transaction {
   sector: string;
@@ -49,7 +49,7 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
 
   filteredOptions: Observable<string[]>;
 
-  displayedColumns = ['sector', 'industry', 'asset_class', 'product_name', 'symbol', 'allocation', 'marketcap', 'risk_score', 'close_price', 'rownum'];
+  displayedColumns = ['sector', 'industry', 'asset_class', 'product_name', 'symbol', 'allocation', 'marketcap', 'risk_score', 'close_price'];
   transactions: Transaction[] = [
 
   ];
@@ -75,6 +75,25 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
     "marketcap": 4.371211208E7,
     "industry": "Major Pharmaceuticals"
   }
+
+//   Name: "Grindrod Shipping Holdings Ltd."
+// MarketCap: 127596505.6
+// Sector: "Transportation"
+// Industry: "Marine Transportation"
+// L2: "Micro Cap"
+// close_price: 6
+// risk_score: 61.39
+// return_2019: null
+// return_2018: null
+// return_2017: null
+// return_2016: null
+// return_2015: null
+// return_2014: null
+// return_2013: null
+// return_2012: null
+// return_2011: null
+// return_2010: null
+// position: 1
 
 
   dataSource = new MatTableDataSource<Transaction>(this.transactions);
@@ -113,7 +132,7 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.message = this.eventBusService.getData();
-    console.log(this.message);
+    // console.log(this.message);
     // alert(this.message);
     // this.filteredOptions = this.searchTerm.valueChanges.pipe(
     //   // startWith(''),
@@ -133,7 +152,7 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
     return this.transactions.map(t => t.allocation).reduce((acc, value) => acc + value, 0);
   }
 
-  getPosts(event) {
+  getPosts(event, trigger, auto) {
     // alert(event.option.value);
     // console.log(event.option.value);
     // this.product = this.service.getProductById(event.option.value.symbol);
@@ -141,6 +160,8 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
     this.dataSource.data.push(newItem);  //add the new model object to the dataSource
     this.dataSource.data = [...this.dataSource.data];  //refresh the dataSource
     this.dataSource._updateChangeSubscription();
+
+    this.resetAutoInput(event.option.value, trigger, auto);
   }
 
   createRowData(proddata) {
@@ -177,10 +198,28 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
     this.openDialog();
   }
 
+  allocChange(event, elements) {
+    console.log(event);
+    console.log(elements);
+    // this.getTotalCost();
+    alert('1');
+    this.dataSource._updateChangeSubscription();
+  }
+
+  resetAutoInput(optVal, trigger: MatAutocompleteTrigger, auto: MatAutocomplete) {
+    setTimeout(_ => {
+      auto.options.forEach((item) => {
+        item.deselect()
+      });
+      this.searchTerm.reset('');
+      trigger.openPanel();
+      }, 100);
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(RecommendationComponent, {
-      width:'50vw',
-      height: '50vh',
+      width:'70vw',
+      height: '65vh',
       data: {
         message: (this.message && this.message.risk_profile) ? this.message.risk_profile : 0,
         buttonText: {
@@ -191,9 +230,46 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
     });
     
 
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        alert('Confimr');
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(result);
+//         Name: "Grindrod Shipping Holdings Ltd."
+// MarketCap: 127596505.6
+// Sector: "Transportation"
+// Industry: "Marine Transportation"
+// L2: "Micro Cap"
+// close_price: 6
+// risk_score: 61.39
+// return_2019: null
+// return_2018: null
+// return_2017: null
+// return_2016: null
+// return_2015: null
+// return_2014: null
+// return_2013: null
+// return_2012: null
+// return_2011: null
+// return_2010: null
+// position: 1
+        result.data.forEach(itm => {
+          const newItem: Transaction = {
+            sector: itm.Sector,
+            industry: itm.Industry,
+            asset_class: itm.L2,
+            product_name: itm.Name,
+            symbol: '',
+            allocation: 0,
+            marketcap: itm.MarketCap,
+            risk_score: itm.risk_score,
+            close_price: itm.close_price,
+            rownum: 0
+          }
+          this.dataSource.data.push(newItem);  //add the new model object to the dataSource
+          
+        });
+        this.dataSource.data = [...this.dataSource.data];  //refresh the dataSource
+          this.dataSource._updateChangeSubscription();
+        
       }
     });
   }

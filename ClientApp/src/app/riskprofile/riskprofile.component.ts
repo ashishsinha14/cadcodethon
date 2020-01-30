@@ -51,19 +51,19 @@ export class RiskprofileComponent implements OnInit {
   ];
 
   primFinNeed: Objective[] = [
-    { value: 0, viewValue: 'Wealth Accumulation/Investment' },
-    { value: 1, viewValue: 'Retirement' },
-    { value: 2, viewValue: 'Education Planning' },
-    { value: 3, viewValue: 'Current Income' },
-    { value: 4, viewValue: 'Estate/Legacy Planning' },
-    { value: 5, viewValue: 'Major Purchase/Expense' },
-    { value: 6, viewValue: 'Wealth Accumulation/Investment' },
-    { value: 7, viewValue: 'Major Purchase Income' },
+    { value: 1, viewValue: 'Wealth Accumulation/Investment' },
+    { value: 2, viewValue: 'Retirement' },
+    { value: 3, viewValue: 'Education Planning' },
+    { value: 4, viewValue: 'Current Income' },
+    { value: 5, viewValue: 'Estate/Legacy Planning' },
+    { value: 6, viewValue: 'Major Purchase/Expense' },
+    { value: 7, viewValue: 'Wealth Accumulation/Investment' },
+    { value: 8, viewValue: 'Major Purchase Income' },
   ];
 
   invHorizon: Objective[] = [
-    { value: 0, viewValue: '11 to 20 Years' },
-    { value: 1, viewValue: 'Over 20 Years' },
+    { value: 1, viewValue: '11 to 20 Years' },
+    { value: 2, viewValue: 'Over 20 Years' },
     { value: 3, viewValue: '6 to 10 Years' },
     { value: 4, viewValue: 'Immediate' },
     { value: 5, viewValue: '2 to 5 Years' },
@@ -72,8 +72,8 @@ export class RiskprofileComponent implements OnInit {
   ];
 
   liqNeed: Objective[] = [
-    { value: 0, viewValue: '11 to 20 Years' },
-    { value: 1, viewValue: 'Over 20 Years' },
+    { value: 1, viewValue: '11 to 20 Years' },
+    { value: 2, viewValue: 'Over 20 Years' },
     { value: 3, viewValue: '6 to 10 Years' },
     { value: 4, viewValue: 'Immediate' },
     { value: 5, viewValue: '2 to 5 Years' },
@@ -85,7 +85,7 @@ export class RiskprofileComponent implements OnInit {
   BaseURL: string;
   Headers: any;
   rskProfile:any;
-  request: any;
+  request: any = {};
 
   constructor(private router: Router, private eventBusService: EventBusService,
     private observableService: ObservableService, http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
@@ -152,26 +152,27 @@ export class RiskprofileComponent implements OnInit {
   }
 
   selChange(event, id) {
-    this.request = this.createRequest();
-    if(event.id === 'MI') {
+    // this.request = this.createRequest();
+    if(id === 'MI') {
       this.request.inv_obj_most = event.value;
-    } else if(event.id === 'VI') {
+    } else if(id === 'VI') {
       this.request.inv_obj_imp = event.value;
-    } else if(event.id === 'SI') {
+    } else if(id === 'SI') {
       this.request.inv_obj_some_imp = event.value;
-    } else if(event.id === 'LI') {
+    } else if(id === 'LI') {
       this.request.inv_obj_least = event.value;
-    } else if(event.id === 'Risk Tolerance') {
+    } else if(id === 'Risk Tolerance') {
       this.request.risk_tolerance = event.value;
-    } else if(event.id === 'Liquidty Need') {
+    } else if(id === 'Liquidty Need') {
       this.request.liquidy_need = event.value;
-    } else if(event.id === 'Time Horizon') {
+    } else if(id === 'Time Horizon') {
       this.request.inv_horizon = event.value;
+    } else if(id === 'Fin Need') {
+      this.request.primary_fin_need = event.value;
     }
     this.request.rownum = 0;
     this.request.account_name = '';
     this.request.volatility = 8.04;
-    this.request.primary_fin_need = '';
     this.request.inv_amount = 100;
     this.request.model_id = null;
     this.request.model_name = '';

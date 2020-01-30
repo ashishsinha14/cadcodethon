@@ -32,8 +32,6 @@ namespace cad.Controllers
             }
         }
 
-       
-
         [HttpPost]
         public async Task<RiskScore> Post([FromBody] RiskScore request)
         {
@@ -58,46 +56,8 @@ namespace cad.Controllers
                 Console.WriteLine(ex);
             }
             return objRiskSCoreResponse;
-            //var client = new HttpClient();
-            //client.BaseAddress = new Uri("http://ilawebapp.azurewebsites.net/model/riskscore");
-            //var response = await client.PostAsJsonAsync("http://ilawebapp.azurewebsites.net/model/riskscore", request);
-            //var responseObject = await response.Content.ReadAsAsync<RiskScore>();
-            //return responseObject;
-
-            //var response = new HttpClient().PostAsJsonAsync<RiskScore>("http://ilawebapp.azurewebsites.net/model/riskscore", request).Result;
-            //var responseObject = await response.Content.ReadAsAsync<RiskScore>();
-            //return responseObject;
+            
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> UpdateReservation(Reservation reservation)
-        //{
-        //    Reservation receivedReservation = new Reservation();
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        var content = new MultipartFormDataContent();
-        //        content.Add(new StringContent(reservation.Id.ToString()), "Id");
-        //        content.Add(new StringContent(reservation.Name), "Name");
-        //        content.Add(new StringContent(reservation.StartLocation), "StartLocation");
-        //        content.Add(new StringContent(reservation.EndLocation), "EndLocation");
-
-        //        using (var response = await httpClient.PutAsync("http://localhost:8888/api/Reservation", content))
-        //        {
-        //            string apiResponse = await response.Content.ReadAsStringAsync();
-        //            ViewBag.Result = "Success";
-        //            receivedReservation = JsonConvert.DeserializeObject<Reservation>(apiResponse);
-        //        }
-        //    }
-        //    return View(receivedReservation);
-        //}
-        //[HttpPost]
-        //public object PostWeatherForecast([FromBody] object weatherForecast)
-        //{
-        //    var forecast = JObject.Parse(weatherForecast.ToString()).ToObject<WeatherForecast>();
-        //    var x = forecast.DateFormatted;
-        //    return weatherForecast;
-        //}
-
     }
-
 }

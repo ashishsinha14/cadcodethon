@@ -1,56 +1,87 @@
-<span class="B">Recommeded Products</span>
+
 <div>
-    <mat-dialog-content>
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Checkbox Column -->
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                              [checked]="selection.hasValue() && isAllSelected()"
-                              [indeterminate]="selection.hasValue() && !isAllSelected()"
-                              [aria-label]="checkboxLabel()">
-                </mat-checkbox>
-              </th>
-              <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()"
-                              (change)="$event ? selection.toggle(row) : null"
-                              [checked]="selection.isSelected(row)"
-                              [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
-              </td>
-            </ng-container>
-          
-            <!-- Position Column -->
-            <ng-container matColumnDef="position">
-              <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-            </ng-container>
-          
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-              <th mat-header-cell *matHeaderCellDef> Name </th>
-              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-          
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="symbol">
-              <th mat-header-cell *matHeaderCellDef> Symbol </th>
-              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-            </ng-container>
-          
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                (click)="selection.toggle(row)">
-            </tr>
-          </table>
-    </mat-dialog-content>
-    <mat-dialog-actions align="center">
-        <!-- <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">{{confirmButtonText}}</button>
-        <button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button> -->
-    </mat-dialog-actions>
+  <mat-dialog-content>
+    <span class="B">Recommeded Products</span>
+    <div class="table-container mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selectRow($event, row) : null" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+        </ng-container>
+
+        <!-- Asset Class Column -->
+        <ng-container matColumnDef="L2">
+          <th mat-header-cell *matHeaderCellDef> Asset Class </th>
+          <td mat-cell *matCellDef="let element"> {{element.L2}} </td>
+        </ng-container>
+
+        <!-- Risk Score Column -->
+        <ng-container matColumnDef="risk_score">
+          <th mat-header-cell *matHeaderCellDef> Risk Score</th>
+          <td mat-cell *matCellDef="let element"> {{element.risk_score}} </td>
+        </ng-container>
+
+        <!-- Risk Score Column -->
+        <ng-container matColumnDef="return_2019">
+          <th mat-header-cell *matHeaderCellDef> 2019 Return</th>
+          <td mat-cell *matCellDef="let element"> {{element.return_2019}} </td>
+        </ng-container>
+
+        <!-- Risk Score Column -->
+        <ng-container matColumnDef="return_2018">
+          <th mat-header-cell *matHeaderCellDef> 2018 Return</th>
+          <td mat-cell *matCellDef="let element"> {{element.return_2018}} </td>
+        </ng-container>
+
+        <!-- Risk Score Column -->
+        <ng-container matColumnDef="return_2017">
+          <th mat-header-cell *matHeaderCellDef> 2017 Return</th>
+          <td mat-cell *matCellDef="let element"> {{element.return_2017}} </td>
+        </ng-container>
+
+        <!-- Risk Score Column -->
+        <ng-container matColumnDef="return_2016">
+          <th mat-header-cell *matHeaderCellDef> 2016 Return</th>
+          <td mat-cell *matCellDef="let element"> {{element.return_2016}} </td>
+        </ng-container>
+
+        <!-- Risk Score Column -->
+        <ng-container matColumnDef="return_2015">
+          <th mat-header-cell *matHeaderCellDef> 2015 Return</th>
+          <td mat-cell *matCellDef="let element"> {{element.return_2015}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;let even = even;" [ngClass]="{lightblue: even}"
+          (click)="selection.toggle(row);">
+        </tr>
+      </table>
+    </div>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">Select</button>
+         <!--<button mat-raised-button mat-dialog-close tabindex="-1">{{cancelButtonText}}</button> -->
+  </mat-dialog-actions>
 </div>
-
-
-
-
-
