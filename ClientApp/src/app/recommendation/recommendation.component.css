@@ -2,3 +2,7 @@ table {
     width: 100%;
   }
   
+
+  .cdk-global-scrollback {
+      overflow-y: hidden;
+  }

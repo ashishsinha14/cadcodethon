@@ -182,7 +182,7 @@ export class ModelcreateComponent implements OnInit, OnDestroy {
       width:'50vw',
       height: '50vh',
       data: {
-        message: this.message.risk_profile,
+        message: (this.message && this.message.risk_profile) ? this.message.risk_profile : 0,
         buttonText: {
           ok: 'Save',
           cancel: 'No'
